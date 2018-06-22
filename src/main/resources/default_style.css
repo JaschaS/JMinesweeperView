@@ -1,0 +1,105 @@
+
+.button:disabled{
+    -fx-opacity: 1.0;
+}
+
+
+#UndiscoveredCell {
+   -fx-background-color: #33B5E5;
+   -fx-border-radius: 15%;
+   -fx-effect: innershadow(two-pass-box, #0099CC, 3, 2, -1, -2);
+}
+
+#flaggedCell {
+   -fx-background-color: #FFBB33;
+   -fx-border-radius: 15%;
+   -fx-effect: innershadow(two-pass-box, #FF8800, 3, 2, -1, -2);
+   -fx-background-image: url("/flag_2.png");
+}
+
+
+#OpenCell {
+   -fx-background-color: #fafafa;
+   -fx-border-radius: 15%;
+   -fx-effect: innershadow(two-pass-box, #e8e8e8, 3, 2, -1, -2);
+}
+
+#MineFlagged {
+    -fx-alignment: center ;
+    -fx-background-color: #99CC00;
+    -fx-border-radius: 15%;
+    -fx-effect: innershadow(two-pass-box, #669900, 3, 2, -1, -2);
+    -fx-text-fill:white;
+}
+
+#MineExploded {
+    -fx-alignment: center ;
+    -fx-background-color: #FF4444;
+    -fx-border-radius: 15%;
+    -fx-effect: innershadow(two-pass-box, #CC0000, 3, 2, -1, -2);
+    -fx-text-fill:white;
+}
+
+#Mine {
+    -fx-alignment: center ;
+    -fx-background-color: #FF4444;
+    -fx-border-radius: 15%;
+    -fx-effect: innershadow(two-pass-box, #CC0000, 3, 2, -1, -2);
+    -fx-text-fill:black;
+}
+
+#ONE {
+   -fx-background-color: #fafafa;
+   -fx-border-radius: 15%;
+   -fx-effect: innershadow(two-pass-box, #e8e8e8, 3, 2, -1, -2);
+    -fx-text-fill:blue;
+}
+
+#TWO {
+   -fx-background-color: #fafafa;
+   -fx-border-radius: 15%;
+   -fx-effect: innershadow(two-pass-box, #e8e8e8, 3, 2, -1, -2);
+    -fx-text-fill:green;
+}
+
+#THREE {
+   -fx-background-color: #fafafa;
+   -fx-border-radius: 15%;
+   -fx-effect: innershadow(two-pass-box, #e8e8e8, 3, 2, -1, -2);
+    -fx-text-fill:red;
+}
+
+#FOUR {
+   -fx-background-color: #fafafa;
+   -fx-border-radius: 15%;
+   -fx-effect: innershadow(two-pass-box, #e8e8e8, 3, 2, -1, -2);
+    -fx-text-fill:darkblue;
+}
+
+#FIVE {
+   -fx-background-color: #fafafa;
+   -fx-border-radius: 15%;
+   -fx-effect: innershadow(two-pass-box, #e8e8e8, 3, 2, -1, -2);
+    -fx-text-fill:crimson;
+}
+
+#SIX {
+   -fx-background-color: #fafafa;
+   -fx-border-radius: 15%;
+   -fx-effect: innershadow(two-pass-box, #e8e8e8, 3, 2, -1, -2);
+    -fx-text-fill:darkturquoise;
+}
+
+#SEVEN {
+   -fx-background-color: #fafafa;
+   -fx-border-radius: 15%;
+   -fx-effect: innershadow(two-pass-box, #e8e8e8, 3, 2, -1, -2);
+    -fx-text-fill:black;
+}
+
+#EIGHT {
+   -fx-background-color: #fafafa;
+   -fx-border-radius: 15%;
+   -fx-effect: innershadow(two-pass-box, #e8e8e8, 3, 2, -1, -2);
+    -fx-text-fill:olive;
+}
