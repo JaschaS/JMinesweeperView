@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.jscholz.jminesweeper.view.OptionController">
+   <children>
+      <BorderPane layoutX="227.0" layoutY="83.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <BorderPane BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets left="15.0" right="15.0" />
+               </BorderPane.margin>
+               <left>
+                  <VBox spacing="15.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <RadioButton fx:id="beginner" mnemonicParsing="false" selected="true" text="Beginner">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="difficulty" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="intermediate" mnemonicParsing="false" text="Intermediate" toggleGroup="$difficulty" />
+                        <RadioButton fx:id="advanced" mnemonicParsing="false" text="Advanced" toggleGroup="$difficulty" />
+                        <RadioButton fx:id="custom" mnemonicParsing="false" text="Custom" toggleGroup="$difficulty" />
+                     </children>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                     <BorderPane.margin>
+                        <Insets right="15.0" />
+                     </BorderPane.margin>
+                  </VBox>
+               </left>
+               <top>
+                  <BorderPane BorderPane.alignment="CENTER">
+                     <left>
+                        <Label text="Difficulty" BorderPane.alignment="CENTER" />
+                     </left>
+                     <bottom>
+                        <Separator prefWidth="200.0" BorderPane.alignment="CENTER" />
+                     </bottom>
+                  </BorderPane>
+               </top>
+               <center>
+                  <BorderPane BorderPane.alignment="CENTER">
+                     <center>
+                        <VBox spacing="15.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <BorderPane>
+                                 <top>
+                                    <Label text="Width" BorderPane.alignment="CENTER_LEFT" />
+                                 </top>
+                                 <center>
+                                    <Slider fx:id="widthSlider" BorderPane.alignment="CENTER" />
+                                 </center>
+                                 <right>
+                                    <Label fx:id="widthValue" text="Label" BorderPane.alignment="CENTER" />
+                                 </right>
+                              </BorderPane>
+                              <BorderPane layoutX="10.0" layoutY="10.0">
+                                 <center>
+                                    <Slider fx:id="heightSlider" BorderPane.alignment="CENTER" />
+                                 </center>
+                                 <right>
+                                    <Label fx:id="heightValue" text="Label" BorderPane.alignment="CENTER" />
+                                 </right>
+                                 <top>
+                                    <Label text="Height" BorderPane.alignment="CENTER_LEFT" />
+                                 </top>
+                              </BorderPane>
+                              <BorderPane layoutX="10.0" layoutY="110.0">
+                                 <center>
+                                    <Slider fx:id="minesSlider" BorderPane.alignment="CENTER" />
+                                 </center>
+                                 <right>
+                                    <Label fx:id="minesValue" text="Label" BorderPane.alignment="CENTER" />
+                                 </right>
+                                 <top>
+                                    <Label text="Mines" BorderPane.alignment="CENTER_LEFT" />
+                                 </top>
+                              </BorderPane>
+                           </children>
+                           <BorderPane.margin>
+                              <Insets left="10.0" />
+                           </BorderPane.margin>
+                        </VBox>
+                     </center>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                  </BorderPane>
+               </center>
+            </BorderPane>
+         </top>
+         <bottom>
+            <BorderPane BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="15.0" left="15.0" right="15.0" />
+               </BorderPane.margin>
+               <bottom>
+                  <GridPane BorderPane.alignment="CENTER">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <AnchorPane GridPane.columnIndex="1">
+                           <children>
+                              <GridPane hgap="10.0" layoutX="43.0" layoutY="-31.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-0.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                       <children>
+                                          <Button fx:id="ok" layoutX="42.0" layoutY="1.0" mnemonicParsing="false" text="Ok" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                       <children>
+                                          <Button fx:id="cancel" mnemonicParsing="false" text="Cancel" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </GridPane>
+               </bottom>
+               <left>
+                  <VBox spacing="15.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <CheckBox fx:id="continueGame" mnemonicParsing="false" text="Always continue last game" />
+                        <CheckBox fx:id="saveGame" mnemonicParsing="false" text="Always save game on exit">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </CheckBox>
+                     </children>
+                     <BorderPane.margin>
+                        <Insets bottom="25.0" top="15.0" />
+                     </BorderPane.margin>
+                  </VBox>
+               </left>
+               <top>
+                  <BorderPane BorderPane.alignment="CENTER">
+                     <bottom>
+                        <Separator prefWidth="200.0" BorderPane.alignment="CENTER" />
+                     </bottom>
+                     <left>
+                        <Label text="Settings" BorderPane.alignment="CENTER" />
+                     </left>
+                     <BorderPane.margin>
+                        <Insets top="15.0" />
+                     </BorderPane.margin>
+                  </BorderPane>
+               </top>
+            </BorderPane>
+         </bottom>
+         <padding>
+            <Insets top="15.0" />
+         </padding>
+      </BorderPane>
+   </children>
+</AnchorPane>

@@ -1,5 +1,6 @@
 package de.jscholz.jminesweeper.view;
 
+import de.jscholz.jminesweeper.database.DatabaseHandler;
 import de.jscholz.jminesweeper.minesweeper.*;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -9,6 +10,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -32,7 +35,9 @@ public class MinesweeperView extends Application implements ClickCallback {
          * - Spiel speichern
          * - Schwierigkeitsgrad wechseln
          * - Hilfe hinzufuegen
+         * - Save Options
          */
+
         launch ( args );
     }
 
@@ -60,12 +65,21 @@ public class MinesweeperView extends Application implements ClickCallback {
 
     private final PrimaryClickListener primaryClickListener;
     private final SecondaryClickListener secondaryClickListener;
+    private DatabaseHandler databaseHandler;
     private IMinefield minefield;
     private Map<ICellPosition, ICell> field;
     private MinesweeperController controller;
     //private MinesweeperCanvasController canvasController;
 
     public MinesweeperView() {
+        try {
+            this.databaseHandler = new DatabaseHandler();
+            this.databaseHandler.setupDatabase();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            this.databaseHandler = null;
+        }
+
         this.minefield =  GameCreator.createBeginnerGame();
         this.field = minefield.getFieldForVisualization();
         this.controller = null;
