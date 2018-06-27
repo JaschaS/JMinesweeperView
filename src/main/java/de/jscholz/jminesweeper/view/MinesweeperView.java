@@ -1,6 +1,5 @@
 package de.jscholz.jminesweeper.view;
 
-import de.jscholz.jminesweeper.database.DatabaseHandler;
 import de.jscholz.jminesweeper.minesweeper.*;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -10,16 +9,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+import java.lang.reflect.Field;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
-public class MinesweeperView extends Application implements ClickCallback {
-
-    public static final int CELL_SIZE = 32;
-    public static final int CELL_MARGIN = 2;
+public class MinesweeperView extends Application implements ClickCallback, OptionCallback {
 
     public static void main(final String[] args) {
         /**
@@ -37,10 +35,11 @@ public class MinesweeperView extends Application implements ClickCallback {
          * - Hilfe hinzufuegen
          * - Save Options
          */
-
         launch ( args );
     }
 
+    public static final int CELL_SIZE = 32;
+    public static final int CELL_MARGIN = 2;
     private final static HashMap<CellState, CharacterDesign> STATE_CHARACTER;
     private final static HashMap<CellContent, String> CONTENT_CHARACTER;
 
@@ -65,25 +64,17 @@ public class MinesweeperView extends Application implements ClickCallback {
 
     private final PrimaryClickListener primaryClickListener;
     private final SecondaryClickListener secondaryClickListener;
-    private DatabaseHandler databaseHandler;
+    private OptionDialog optionDialog;
     private IMinefield minefield;
     private Map<ICellPosition, ICell> field;
     private MinesweeperController controller;
-    //private MinesweeperCanvasController canvasController;
+    private Stage primaryStage;
 
     public MinesweeperView() {
-        try {
-            this.databaseHandler = new DatabaseHandler();
-            this.databaseHandler.setupDatabase();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            this.databaseHandler = null;
-        }
-
-        this.minefield =  GameCreator.createBeginnerGame();
+        GameCreator.setGame(Difficulty.EXPERT);
+        this.minefield =  GameCreator.createGame();
         this.field = minefield.getFieldForVisualization();
         this.controller = null;
-        //this.canvasController = null;
         this.primaryClickListener = new PrimaryClickListener(this.minefield, this);
         this.secondaryClickListener = new SecondaryClickListener(this.minefield, this);
     }
@@ -91,22 +82,19 @@ public class MinesweeperView extends Application implements ClickCallback {
     @Override
     public void start(final Stage primaryStage) throws Exception {
 
+        this.primaryStage = primaryStage;
+
         //1x2x3x4x5
-        final int rows = this.minefield.getRows();
-        final int cols = this.minefield.getColumns();
-        final double width = CELL_SIZE * rows + CELL_MARGIN * (rows+1);
-        final double height = CELL_SIZE * cols + CELL_MARGIN * (cols+1) + 29;
+        final FXMLLoader viewLoader = new FXMLLoader ( getClass ().getResource ( "/Minesweeper.fxml" ) );
 
-        final FXMLLoader consoleViewLoader = new FXMLLoader ( getClass ().getResource ( "/Minesweeper.fxml" ) );
+        this.optionDialog = new OptionDialog(primaryStage, this);
 
-        final Parent consoleView = consoleViewLoader.load();
-        //this.canvasController = consoleViewLoader.getController();
-        //this.canvasController.initialize(width, height);
-        this.controller = consoleViewLoader.getController();
+        final Parent view = viewLoader.load();
+        this.controller = viewLoader.getController();
         this.controller.setPrimaryClick(this.primaryClickListener);
         this.controller.setSecondaryClick(this.secondaryClickListener);
         this.controller.setNewGameOnAction((ActionEvent event) -> {
-            this.minefield = GameCreator.createBeginnerGame();
+            this.minefield = GameCreator.createGame();
             this.primaryClickListener.setMinefield(this.minefield);
             this.secondaryClickListener.setMinefield(this.minefield);
             this.field.clear();
@@ -116,15 +104,25 @@ public class MinesweeperView extends Application implements ClickCallback {
         this.controller.setQuitOnAction((ActionEvent event) -> {
             Platform.exit();
         });
+        this.controller.setOptionsOnAction((ActionEvent event) -> {
+            this.optionDialog.show();
+        });
         this.controller.initialize();
 
-        final Scene scene = new Scene( consoleView, width, height);
+        final Scene scene = new Scene( view );
         scene.getStylesheets().add("/default_style.css");
 
-        primaryStage.centerOnScreen ();
-        primaryStage.setTitle ( "Minesweeper" );
-        primaryStage.setScene ( scene );
-        primaryStage.show ();
+        this.primaryStage.centerOnScreen ();
+        this.primaryStage.setTitle ( "Minesweeper" );
+        this.primaryStage.setScene ( scene );
+        this.primaryStage.setWidth(getWidth());
+        this.primaryStage.setHeight(getHeight());
+        this.primaryStage.show ();
+    }
+
+    @Override
+    public void stop() throws Exception {
+        super.stop();
     }
 
     @Override
@@ -132,6 +130,8 @@ public class MinesweeperView extends Application implements ClickCallback {
         final Set<ICell> cells = this.minefield.getUpdateCells();
 
         assert cells.size() > 0 : "Size should be greater than 0! Otherwise don't call update";
+
+        long startTime = System.nanoTime();
 
         for (final ICell cell : cells) {
             final ICellPosition position = cell.getPosition();
@@ -144,11 +144,13 @@ public class MinesweeperView extends Application implements ClickCallback {
 
             this.controller.openButton(position, cell, displayCharacter);
         }
+
+        long endTime = System.nanoTime() - startTime;
+        System.out.println("Update " + TimeUnit.NANOSECONDS.toMillis(endTime));
     }
 
     @Override
     public void gameCleared() {
-        System.out.println("You won!");
         final Set<ICell> cells = this.minefield.getUpdateCells();
 
         assert cells.size() > 0 : "Size should be greater than 0! Otherwise don't call update";
@@ -172,6 +174,8 @@ public class MinesweeperView extends Application implements ClickCallback {
 
         assert cells.size() > 0 : "Size should be greater than 0! Otherwise don't call update";
 
+        long startTime = System.nanoTime();
+
         for (final ICell cell : cells) {
             final ICellPosition position = cell.getPosition();
 
@@ -186,6 +190,34 @@ public class MinesweeperView extends Application implements ClickCallback {
             this.controller.openButtonGameOver(position, cell, displayCharacter, isExplodedMine);
         }
 
+        long endTime = System.nanoTime() - startTime;
+        System.out.println("Game Over " + TimeUnit.NANOSECONDS.toMillis(endTime));
+    }
+
+    @Override
+    public void resetGame(final int width, final int height) {
+        this.primaryStage.setWidth(getWidth(width));
+        this.primaryStage.setHeight(getHeight(height));
+        this.primaryStage.centerOnScreen ();
+        this.controller.initialize();
+    }
+
+    private int getWidth() {
+        final int rows = this.minefield.getRows();
+        return getWidth(rows);
+    }
+
+    private int getWidth(final int rows) {
+        return CELL_SIZE * rows + CELL_MARGIN * (rows+1);
+    }
+
+    private int getHeight() {
+        final int cols = this.minefield.getColumns();
+        return getHeight(cols);
+    }
+
+    private int getHeight(final int cols) {
+        return CELL_SIZE * cols + CELL_MARGIN * (cols+1) + 51;
     }
 
     private interface CharacterDesign {

@@ -27,6 +27,8 @@ public class MinesweeperController {
     private MenuItem loadGame;
     @FXML
     private MenuItem quit;
+    @FXML
+    private MenuItem options;
 
     private ButtonClick primaryClick;
     private ButtonClick secondaryClick;
@@ -37,7 +39,7 @@ public class MinesweeperController {
     }
 
     public void initialize() {
-        assert this.newGame != null : "NewGame MenuItem is null!";
+        assert this.newGame != null : "newGame MenuItem is null!";
 
         this.field.setId("gridpane");
         this.newGame.fire();
@@ -52,12 +54,10 @@ public class MinesweeperController {
 
             final int x = position.getX();
             final int y = position.getY();
-            //final CellButton button = new CellButton(x, y, 32, 32);
-            //Image image = new Image(getClass().getResourceAsStream("/test.png"));
             final Button button = new Button("");
             button.setId("UndiscoveredCell");
             button.setMinSize(CELL_SIZE, CELL_SIZE);
-            //button.setOnClicked(event -> {
+
             button.setOnMouseClicked(event -> {
                 final MouseButton type = event.getButton();
                 final int clickCount = event.getClickCount();
@@ -93,6 +93,12 @@ public class MinesweeperController {
         assert this.quit != null : "Quit MenuItem is null!";
 
         this.quit.setOnAction(click);
+    }
+
+    public void setOptionsOnAction(final EventHandler<ActionEvent> click) {
+        assert this.options != null : "Options MenuItem is null!";
+
+        this.options.setOnAction(click);
     }
 
     public void setPrimaryClick(final ButtonClick onClick) {

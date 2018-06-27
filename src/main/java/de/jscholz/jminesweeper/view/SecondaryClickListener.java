@@ -14,18 +14,18 @@ public class SecondaryClickListener extends ClickListener  {
 
         switch (returnValue) {
             case NOW_FLAGGED:
-                System.out.println("Cell is now flagged.");
+                //System.out.println("Cell is now flagged.");
                 callback.update();
 
                 break;
             case REMOVE_FLAG:
 
-                System.out.println("Cell is no longer flagged.");
+                //System.out.println("Cell is no longer flagged.");
                 callback.update();
 
                 break;
             default:
-                System.out.println("Wrong return value - " + returnValue);
+                //System.out.println("Wrong return value - " + returnValue);
                 break;
         }
     }

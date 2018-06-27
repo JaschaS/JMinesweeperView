@@ -1,0 +1,26 @@
+Release v1.0 - 27-06-2018
+
+New:
+This release contains a fully functional game.
+- You can flag cells with a secondary click.
+- You can open cells with a single click
+- GameOver will be called if the user clicks on a mine.
+- The game is cleared when all cells which are not containing a mine are opened.
+- You can set the difficulty level under options.
+- You can start a new game under "New Game".
+
+Improvements:
+None
+
+Fixes:
+None
+
+Known Issues:
+- The chosen difficulty is not saved by the game.
+- After setting the difficulty the user has to start a new game
+- There are no statistics yet.
+- There is no game over screen implemented yet.
+- The user can't double click on a single cell.
+- The game will not be saved nor load.
+- There are some performance issues caused by the css stylesheet.
+

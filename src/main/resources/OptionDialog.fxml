@@ -53,7 +53,7 @@
                                     <Label text="Width" BorderPane.alignment="CENTER_LEFT" />
                                  </top>
                                  <center>
-                                    <Slider fx:id="widthSlider" BorderPane.alignment="CENTER" />
+                                    <Slider fx:id="widthSlider" blockIncrement="1.0" majorTickUnit="1.0" max="30.0" min="8.0" minorTickCount="1" BorderPane.alignment="CENTER" />
                                  </center>
                                  <right>
                                     <Label fx:id="widthValue" text="Label" BorderPane.alignment="CENTER" />
@@ -61,7 +61,7 @@
                               </BorderPane>
                               <BorderPane layoutX="10.0" layoutY="10.0">
                                  <center>
-                                    <Slider fx:id="heightSlider" BorderPane.alignment="CENTER" />
+                                    <Slider fx:id="heightSlider" blockIncrement="1.0" majorTickUnit="1.0" max="24.0" min="8.0" minorTickCount="1" BorderPane.alignment="CENTER" />
                                  </center>
                                  <right>
                                     <Label fx:id="heightValue" text="Label" BorderPane.alignment="CENTER" />
@@ -72,7 +72,7 @@
                               </BorderPane>
                               <BorderPane layoutX="10.0" layoutY="110.0">
                                  <center>
-                                    <Slider fx:id="minesSlider" BorderPane.alignment="CENTER" />
+                                    <Slider fx:id="minesSlider" blockIncrement="1.0" majorTickUnit="1.0" max="93.0" min="16.0" minorTickCount="1" BorderPane.alignment="CENTER" />
                                  </center>
                                  <right>
                                     <Label fx:id="minesValue" text="Label" BorderPane.alignment="CENTER" />
