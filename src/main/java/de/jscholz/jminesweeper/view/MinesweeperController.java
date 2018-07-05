@@ -57,7 +57,8 @@ public class MinesweeperController {
             final Button button = new Button("");
             button.setId("UndiscoveredCell");
             button.setMinSize(CELL_SIZE, CELL_SIZE);
-
+            // caching will increase the performance of the style.
+            button.setCache(true);
             button.setOnMouseClicked(event -> {
                 final MouseButton type = event.getButton();
                 final int clickCount = event.getClickCount();

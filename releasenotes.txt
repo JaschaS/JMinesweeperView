@@ -1,4 +1,21 @@
-Release v1.0 - 27-06-2018
+#Update v1.1 - 27-06-2018
+
+New:
+- A game over screen will now be shown after losing or wining the game.
+- The user can now double click on a cell.
+
+Improvements:
+- After setting the difficulty the user has no longer to start a new game.
+
+Fixes:
+- There were some performance issues caused by the css stylesheet.
+
+Known Issues:
+- The chosen difficulty is not saved by the game.
+- There are no statistics yet.
+- The game will not be saved nor load.
+
+#Release v1.0 - 27-06-2018
 
 New:
 This release contains a fully functional game.
@@ -17,7 +34,7 @@ None
 
 Known Issues:
 - The chosen difficulty is not saved by the game.
-- After setting the difficulty the user has to start a new game
+- After setting the difficulty the user has to start a new game.
 - There are no statistics yet.
 - There is no game over screen implemented yet.
 - The user can't double click on a single cell.
