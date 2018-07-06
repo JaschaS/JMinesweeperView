@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-public class MinesweeperView extends Application implements ClickCallback, OptionCallback {
+public class MinesweeperView extends Application implements ClickCallback, OptionCallback, GameOverCallback {
 
     public static void main(final String[] args) {
         /**
@@ -65,6 +65,7 @@ public class MinesweeperView extends Application implements ClickCallback, Optio
     private final PrimaryClickListener primaryClickListener;
     private final SecondaryClickListener secondaryClickListener;
     private OptionDialog optionDialog;
+    private GameOverDialog gameOverDialog;
     private IMinefield minefield;
     private Map<ICellPosition, ICell> field;
     private MinesweeperController controller;
@@ -88,6 +89,7 @@ public class MinesweeperView extends Application implements ClickCallback, Optio
         final FXMLLoader viewLoader = new FXMLLoader ( getClass ().getResource ( "/Minesweeper.fxml" ) );
 
         this.optionDialog = new OptionDialog(primaryStage, this);
+        this.gameOverDialog = new GameOverDialog(primaryStage, this);
 
         final Parent view = viewLoader.load();
         this.controller = viewLoader.getController();
@@ -129,9 +131,7 @@ public class MinesweeperView extends Application implements ClickCallback, Optio
     public void update() {
         final Set<ICell> cells = this.minefield.getUpdateCells();
 
-        assert cells.size() > 0 : "Size should be greater than 0! Otherwise don't call update";
-
-        long startTime = System.nanoTime();
+        assert cells != null : "The update set was null";
 
         for (final ICell cell : cells) {
             final ICellPosition position = cell.getPosition();
@@ -144,16 +144,13 @@ public class MinesweeperView extends Application implements ClickCallback, Optio
 
             this.controller.openButton(position, cell, displayCharacter);
         }
-
-        long endTime = System.nanoTime() - startTime;
-        System.out.println("Update " + TimeUnit.NANOSECONDS.toMillis(endTime));
     }
 
     @Override
     public void gameCleared() {
         final Set<ICell> cells = this.minefield.getUpdateCells();
 
-        assert cells.size() > 0 : "Size should be greater than 0! Otherwise don't call update";
+        assert cells != null : "The update set was null";
 
         for (final ICell cell : cells) {
             final ICellPosition position = cell.getPosition();
@@ -166,15 +163,15 @@ public class MinesweeperView extends Application implements ClickCallback, Optio
 
             this.controller.openButtonGameOver(position, cell, displayCharacter, false);
         }
+
+        this.gameOverDialog.show();
     }
 
     @Override
     public void mineExploded(final int x, final int y) {
         final Set<ICell> cells = this.minefield.getUpdateCells();
 
-        assert cells.size() > 0 : "Size should be greater than 0! Otherwise don't call update";
-
-        long startTime = System.nanoTime();
+        assert cells != null : "The update set was null";
 
         for (final ICell cell : cells) {
             final ICellPosition position = cell.getPosition();
@@ -190,8 +187,7 @@ public class MinesweeperView extends Application implements ClickCallback, Optio
             this.controller.openButtonGameOver(position, cell, displayCharacter, isExplodedMine);
         }
 
-        long endTime = System.nanoTime() - startTime;
-        System.out.println("Game Over " + TimeUnit.NANOSECONDS.toMillis(endTime));
+        this.gameOverDialog.show();
     }
 
     @Override
@@ -218,6 +214,21 @@ public class MinesweeperView extends Application implements ClickCallback, Optio
 
     private int getHeight(final int cols) {
         return CELL_SIZE * cols + CELL_MARGIN * (cols+1) + 51;
+    }
+
+    @Override
+    public void exitGame() {
+        Platform.exit();
+    }
+
+    @Override
+    public void restartGame() {
+        System.err.println("Not yet implemented");
+    }
+
+    @Override
+    public void newGame() {
+        this.controller.initialize();
     }
 
     private interface CharacterDesign {

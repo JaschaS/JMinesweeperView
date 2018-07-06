@@ -6,7 +6,7 @@
 
     <groupId>JMinesweeperView</groupId>
     <artifactId>JMinesweeperView</artifactId>
-    <version>1.0</version>
+    <version>1.1.2-Snapshot</version>
     <packaging>jar</packaging>
     <build>
         <plugins>
@@ -62,7 +62,7 @@
         <dependency>
             <groupId>JMinesweeper</groupId>
             <artifactId>JMinesweeper</artifactId>
-            <version>1.0.1-SNAPSHOT</version>
+            <version>1.1</version>
         </dependency>
 
     </dependencies>

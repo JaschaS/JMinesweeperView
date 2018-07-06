@@ -13,7 +13,7 @@ Fixes:
 Known Issues:
 - The chosen difficulty is not saved by the game.
 - There are no statistics yet.
-- The game will not be saved nor load.
+- The game will not be saved nor loaded.
 
 #Release v1.0 - 27-06-2018
 

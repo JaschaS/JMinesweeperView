@@ -7,8 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane prefHeight="261.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameOverDialog">
+<AnchorPane prefHeight="261.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.jscholz.jminesweeper.view.GameOverDialogController">
    <children>
       <BorderPane layoutX="200.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <bottom>
@@ -24,17 +23,17 @@
                <children>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" text="Exit" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <Button fx:id="exitGame" mnemonicParsing="false" text="Exit" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                      <children>
-                        <Button layoutX="14.0" layoutY="1.0" mnemonicParsing="false" text="Restart this game" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <Button fx:id="restartGame" layoutX="14.0" layoutY="1.0" mnemonicParsing="false" text="Restart this game" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
                      <children>
-                        <Button layoutX="24.0" layoutY="1.0" mnemonicParsing="false" text="Play again" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <Button fx:id="newGame" layoutX="24.0" layoutY="1.0" mnemonicParsing="false" text="Play again" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </children>
                   </AnchorPane>
                </children>
@@ -55,12 +54,12 @@
                <children>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <Label text="Congratulations, you won the game!" BorderPane.alignment="CENTER" />
+                        <Label fx:id="gameOverMessage" text="Congratulations, you won the game!" BorderPane.alignment="CENTER" />
                      </center>
                   </BorderPane>
                   <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                      <center>
-                        <Label text="You have the fastest time for this difficulty level!" BorderPane.alignment="CENTER" />
+                        <Label fx:id="notification" text="You have the fastest time for this difficulty level!" BorderPane.alignment="CENTER" />
                      </center>
                   </BorderPane>
                </children>
@@ -85,24 +84,54 @@
                      <children>
                         <BorderPane prefHeight="200.0" prefWidth="200.0">
                            <left>
-                              <Label text="Best Time: xxx seconds" BorderPane.alignment="CENTER" />
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Label text="Best Time:" />
+                                    <HBox alignment="CENTER_LEFT" spacing="3.0">
+                                       <children>
+                                          <Label fx:id="bestTime" text="xxx" />
+                                          <Label text="seconds" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </HBox>
                            </left>
                         </BorderPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                            <left>
-                              <Label text="Games played: 8" BorderPane.alignment="CENTER" />
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Label text="Games played:" />
+                                    <Label fx:id="gamesPlayed" text="xxx" />
+                                 </children>
+                              </HBox>
                            </left>
                         </BorderPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                            <left>
-                              <Label text="Games won: 7" BorderPane.alignment="CENTER" />
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Label text="Games won:" />
+                                    <Label fx:id="gamesWon" text="xxx" />
+                                 </children>
+                              </HBox>
                            </left>
                         </BorderPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <center>
-                              <Label text="Percantage: 75%" BorderPane.alignment="CENTER" />
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Label text="Percantage:" />
+                                    <HBox alignment="CENTER" spacing="3.0">
+                                       <children>
+                                          <Label fx:id="percentage" text="xxx" />
+                                          <Label text="\%" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </HBox>
                            </center>
                         </BorderPane>
                      </children>
@@ -123,12 +152,27 @@
                      <children>
                         <BorderPane prefHeight="200.0" prefWidth="200.0">
                            <left>
-                              <Label text="Time: xxx seconds" BorderPane.alignment="CENTER" />
+                              <HBox alignment="CENTER_LEFT" spacing="10.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Label text="Time:" />
+                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="3.0">
+                                       <children>
+                                          <Label fx:id="timePlayed" text="xxx" />
+                                          <Label text="seconds" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </HBox>
                            </left>
                         </BorderPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                            <center>
-                              <Label text="Date: 22/06/2018" BorderPane.alignment="CENTER" />
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Label text="Date:" />
+                                    <Label fx:id="date" text="15-10-2018" />
+                                 </children>
+                              </HBox>
                            </center>
                         </BorderPane>
                      </children>
